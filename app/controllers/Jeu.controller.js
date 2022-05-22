@@ -41,6 +41,27 @@ app.post('/getAllScoreByIdJeu' , async function(req,res) {
   }
 })
 
+app.post('/insertScore' , async function(req,res) {
+  let response = {};
+  let authorization = req.headers ["authorization"];
+  let Jeu = new JeuModel();
+  let id = req.body.idJeu;
+  let score = req.body.score;
+
+  try{
+      if(req.body.score == "undefined" || req.body.score == undefined || req.body.score == "" || req.body.idJeu == undefined || req.body.idJeu == "undefined" || req.body.idJeu == "") throw new Error("Parametre invalide")
+      
+      response ["metadata"] = requestMetadata.requestMetadata.successMetadata;
+      response ["data"] = await Jeu.insertScore(authorization,id,score);
+  }
+  catch(e){
+      response ["metadata"] = requestMetadata.requestMetadata.errorMetadata;
+      response ["errorMessage"] = e.message;
+  }finally{
+      res.send(JSON.stringify(response));
+  }
+})
+
 
   
 };
