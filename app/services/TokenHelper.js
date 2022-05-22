@@ -64,12 +64,17 @@ module.exports = class TokenHelper {
   }
 
   async getUserByToken (con, token) {
+    try{
         let query = {token_utilisateur : token};
         let token_utilisateur = await con.collection('token_utilisateur').find(query).toArray();
         let id_utilisateur = token_utilisateur[0].id_utilisateur;
         let query_utlisateur = {_id : id_utilisateur};
         let user = await con.collection('Utilisateur').find(query_utlisateur).toArray();
         return user[0];
+    } catch {
+      throw new Error("Accès non autorisée veuillez vous connecter");
+    }
+        
   }
 
   static generateToken (id) {
