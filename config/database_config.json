@@ -1,0 +1,7 @@
+{
+    "username": "Kids",
+    "databasename": "Kids",
+    "password": "bPNt1QQAGya7W76F",
+    "server": "cluster0.ls6zp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "port": "5432"
+}
